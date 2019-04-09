@@ -109,7 +109,7 @@ uint8_t I2C_ReadByte(I2C_Drive_t *Obj, uint8_t DeviceAddress, uint8_t RegisterAd
 }
 /*============================================================================*/
 void I2C_ReadBlock(I2C_Drive_t *Obj, uint8_t *Buffer, uint8_t BytesToRead,uint8_t DeviceAddress, uint8_t RegisterAddress){
-	uint8_t i, RetValue = 0x00;
+	uint8_t i;
 	I2C_BitStart(Obj);
 	I2C_Send(Obj, DeviceAddress);
 	I2C_Send(Obj, RegisterAddress);
@@ -118,7 +118,7 @@ void I2C_ReadBlock(I2C_Drive_t *Obj, uint8_t *Buffer, uint8_t BytesToRead,uint8_
 	Obj->Wait_us(100);
 
 	for (i=0; i<BytesToRead; i++) {
-	    RetValue = I2C_Get(Obj);
+	    I2C_Get(Obj);
 	    Obj->Wait_us(100);
 	}
 	I2C_BitStop(Obj);
