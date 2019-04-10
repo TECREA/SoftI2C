@@ -9,9 +9,9 @@ Initializes the instance of the Software-I2C Driver.
 
 Parameters:
 
-    - Obj : A pointer to the SoftI2c Instance
+    - Obj : A pointer to the SoftI2C Instance
     - SDA_State : The wrapper function with hardware-specific code to control the output of the SDA pin.
-                  SDA_Direc A.
+                  See Note A.
     - SCL_State : The wrapper function with hardware-specific code to control the output of the SCL pin.
                   See Note A.
     - SDA_Direc : The wrapper function with hardware-specific code to control the direction of the SDA pin
@@ -33,9 +33,6 @@ Parameters:
         C.  Wrapper prototype for SoftI2C_WaituSFcn_t: void WrapperFcn(uint32_t x);
             where the argument x is the value to wait in instruction cycles or microseconds    
 
-Return value:
-
-    qTrue on success, otherwise returns qFalse
 */
 /*============================================================================*/
 void SoftI2C_Init(SoftI2C_t *Obj, SoftI2C_BitCtrlFcn_t SDA_State, SoftI2C_BitCtrlFcn_t SCL_State, SoftI2C_BitCtrlFcn_t SDA_Direc, SoftI2C_BitReadFcn_t SDA_VRead, SoftI2C_WaituSFcn_t uSWaitFcn, uint32_t TimeBase){
@@ -74,7 +71,7 @@ Produce a Stop condition.
 
 Parameters:
 
-    - Obj : A pointer to the SoftI2c Instance
+    - Obj : A pointer to the SoftI2C Instance
 
 */
 void SoftI2C_BitStop(SoftI2C_t *Obj) {
@@ -88,16 +85,16 @@ void SoftI2C_BitStop(SoftI2C_t *Obj) {
 /*============================================================================*/
 /*uint8_t SoftI2C_Send(SoftI2C_t *Obj, uint8_t data)
  
-Write a single byte.
+Attempts to write a single byte.
 
 Parameters:
 
-    - Obj : A pointer to the SoftI2c Instance
+    - Obj : A pointer to the SoftI2C Instance
     - data: The data to be written
 
 Return value:
 
-    The dummy byte readed after the write operation
+    The dummy data readed after the write operation
 */
 uint8_t SoftI2C_Send(SoftI2C_t *Obj, uint8_t data) {
     uint8_t ReturnValue = 0x00u;
@@ -125,7 +122,7 @@ uint8_t SoftI2C_Send(SoftI2C_t *Obj, uint8_t data) {
 /*============================================================================*/
 /*uint8_t SoftI2C_Get(SoftI2C_t *Obj)
  
-Read a single byte.
+Attempts to read a single byte.
 
 Parameters:
 
@@ -205,7 +202,7 @@ uint8_t SoftI2C_ReadByte(SoftI2C_t *Obj, uint8_t DeviceAddress, uint8_t Register
 /*============================================================================*/
 /*void I2C_ReadBlock(SoftI2C_t *Obj, uint8_t DeviceAddress, uint8_t RegisterAddress, void *buf, uint8_t count)
  
-Attempts to read up to <count> bytes from SoftI2C instance descriptor into the buffer starting at <buf>.
+Attempts to read up to <count> bytes from the SoftI2C instance into the buffer starting at <buf>.
 
 Parameters:
 
