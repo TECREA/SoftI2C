@@ -23,11 +23,6 @@ void SDADirectionChange(uint8_t x){
     else  puts("DDIR0");
 }
 
-void SCLDirectionChange(uint8_t x){
-    if(x) puts("CDIR1");
-    else  puts("CDIR0");;
-}
-
 uint8_t SDAGetValue(void){
     static uint8_t x = 1;
     x^=x;
@@ -35,9 +30,9 @@ uint8_t SDAGetValue(void){
 }
 
 int main(int argc, char *argv[]){
-    I2C_Drive_t testi2c;
-    I2C_Config_Init( &testi2c, SDAPinControl, SCLPinControl,  SDADirectionChange, SCLDirectionChange, SDAGetValue, NULL, 1000);
-    I2C_ReadByte( &testi2c, 0x80, 0xE3);
+    SoftI2C_t testi2c;
+    SoftI2C_Init( &testi2c, SDAPinControl, SCLPinControl,  SDADirectionChange, SDAGetValue, NULL, 1000);
+    SoftI2C_ReadByte( &testi2c, 0x80, 0xE3);
     
     return EXIT_SUCCESS;
 }
