@@ -216,14 +216,22 @@ Return value:
 
     The data readed
 */
-void I2C_ReadBlock(SoftI2C_t *Obj, uint8_t DeviceAddress, uint8_t RegisterAddress, void *buf, uint8_t count){
+void I2C_ReadBlock(SoftI2C_t *Obj, uint8_t DeviceAddress, uint16_t RegisterAddress, uint8_t RegSize, void *buf, uint8_t count){
 	uint8_t i;
     uint8_t *dat = (uint8_t*)buf;
 	if (count==0) return; /*do nothing*/
     SoftI2C_BitStart(Obj);
 	SoftI2C_Send(Obj, DeviceAddress);
-	SoftI2C_Send(Obj, RegisterAddress);
-	SoftI2C_BitStart(Obj);
+	
+    if(SOFTI2C_REG8BIT_REQUEST){
+        SoftI2C_Send(Obj, RegisterAddress);
+    }
+    else{
+        
+    }
+    
+	
+    SoftI2C_BitStart(Obj);
 	SoftI2C_Send(Obj, DeviceAddress|0x01u);
 	Obj->Wait_us(Obj->BaseTime);
 

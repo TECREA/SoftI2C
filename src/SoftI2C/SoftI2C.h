@@ -27,6 +27,6 @@
 	uint8_t SoftI2C_Send(SoftI2C_t *Obj, uint8_t Data);
 	uint8_t SoftI2C_Get(SoftI2C_t *Obj);
 	uint8_t SoftI2C_ReadByte(SoftI2C_t *Obj,  uint8_t DeviceAddress, uint8_t RegisterAddress);
-	void I2C_ReadBlock(SoftI2C_t *Obj, uint8_t DeviceAddress, uint8_t RegisterAddress, void *buf, uint8_t count);
+	void I2C_ReadBlock(SoftI2C_t *Obj, uint8_t DeviceAddress, , uint16_t RegisterAddress, uint8_t RegSize, void *buf, uint8_t count);
 
 #endif /* SOFT_I2C_H_ */
